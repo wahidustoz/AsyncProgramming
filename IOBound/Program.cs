@@ -1,22 +1,27 @@
 ﻿using System.Diagnostics;
 
-async Task ThisTakes5Seconds()
+async Task FayllarniYuklash()
 {
     await Task.Delay(TimeSpan.FromSeconds(5));
-    Console.WriteLine("5 second task is over.");
+
+    Console.WriteLine($"Fayllarni yuklash tugadi");
 }
 
-async Task ThisTakes2Second()
+async Task UchgachaSanash()
 {
-    await Task.Delay(TimeSpan.FromSeconds(2));
-    Console.WriteLine("2 second task is over.");
-}
+    for(int i = 1; i < 4; i++)
+    {
+        await Task.Delay(TimeSpan.FromSeconds(1));
+        Console.WriteLine($"Uchgacha sanash: {i}");
+    }
 
+    Console.WriteLine($"Uchgacha sanash tugadi");
+}
 
 var stopwatch = new Stopwatch();
 stopwatch.Start();
 
+var tasklar = new Task[] { FayllarniYuklash(), UchgachaSanash() };
+await Task.WhenAll(tasklar);
 
-
-Console.WriteLine($"All done in {stopwatch.ElapsedMilliseconds}ms");
-
+Console.WriteLine($"Hammasiga {stopwatch.ElapsedMilliseconds}ms vaqt ketdi.");
