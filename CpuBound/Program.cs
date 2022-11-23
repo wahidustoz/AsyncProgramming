@@ -21,8 +21,8 @@ async Task CpuThreadAsync()
 
 	var tasklar = new Task[]
 	{
-		Task.Run(() => GetNthFibonacciAsync(42)),
-		Task.Run(() => GetNthFibonacciAsync(42))
+		Task.Run(() => GetNthFibonacci(42)),
+		Task.Run(() => GetNthFibonacci(42))
 	};
 
 	await Task.WhenAll(tasklar);
@@ -52,10 +52,8 @@ stopwatch.Start();
 
 var tasklar = new Task[]
 { 
-	// Task.Run(() => CpuThreadAsync()), 
-	// Task.Run(() => IoThreadAsync()) 
-	CpuThreadAsync(),
-	IoThreadAsync()
+	Task.Run(() => CpuThreadAsync()), 
+	Task.Run(() => IoThreadAsync()) 
 };
 
 await Task.WhenAll(tasklar);
